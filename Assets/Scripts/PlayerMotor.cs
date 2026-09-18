@@ -17,7 +17,6 @@ public class PlayerMotor : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +37,6 @@ public class PlayerMotor : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
-
     }
     // receive the inputs for InputManager.cs and apply them to character controller.
     public void ProcessMove(Vector3 input)
