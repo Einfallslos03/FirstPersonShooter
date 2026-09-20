@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private InputSystem_Actions inputSystem;
-    private InputSystem_Actions.PlayerActions onFoot;
+    private InputSystem_Actions.PlayerActions playerAction;
 
     private PlayerMotor motor;
     private PlayerLook look;
@@ -14,33 +14,33 @@ public class InputManager : MonoBehaviour
     void Awake()
     {
         inputSystem = new InputSystem_Actions();
-        onFoot = inputSystem.Player;
+        playerAction = inputSystem.Player;
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        onFoot.Jump.performed += ctx => motor.Jump();
+        playerAction.Jump.performed += ctx => motor.Jump();
 
-        onFoot.Crouch.performed += ctx => motor.Crouch();
-        onFoot.Sprint.performed += ctx => motor.StartSprint();
-        onFoot.Sprint.canceled += ctx => motor.StopSprint();
+        playerAction.Crouch.performed += ctx => motor.Crouch();
+        playerAction.Sprint.performed += ctx => motor.StartSprint();
+        playerAction.Sprint.canceled += ctx => motor.StopSprint();
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         //tell the playermotor to move using the value  from movement action.
-        motor.ProcessMove(onFoot.Move.ReadValue<Vector3>());
+        motor.ProcessMove(playerAction.Move.ReadValue<Vector3>());
     }
     private void LateUpdate()
     {
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        look.ProcessLook(playerAction.Look.ReadValue<Vector2>());
     }
     private void OnEnable()
     {
-        onFoot.Enable();
+        playerAction.Enable();
     }
     private void OnDisable()
     {
-        onFoot.Disable();
+        playerAction.Disable();
     }
 }

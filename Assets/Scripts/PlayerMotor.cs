@@ -4,11 +4,17 @@ public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
+
+    [Header("Speed")]
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 8f;
+    [SerializeField] private float crouchSpeed = 2f;
+    public float speed;
     private bool isGrounded;
     public bool lerpCrouch = false;
     public bool crouching;
     public bool sprinting;
-    public float speed = 5f;
+
     public float gravity = -9.8f;
     public float jumpHeight = 1f;
     public float crouchTimer = 0f;
@@ -65,16 +71,28 @@ public class PlayerMotor : MonoBehaviour
         crouching = !crouching;
         crouchTimer = 0;
         lerpCrouch = true;
+        UpdateSpeed();
     }
     public void StartSprint()
     {
+        if (crouching) return;
         sprinting = true;
-        speed = 8;
+        UpdateSpeed();
     }
 
     public void StopSprint()
     {
         sprinting = false;
-        speed = 5;
+        UpdateSpeed();
+    }
+
+    private void UpdateSpeed()
+    {
+        if (crouching)
+            speed = crouchSpeed;
+        else if (sprinting)
+            speed = sprintSpeed;
+        else
+            speed = walkSpeed;
     }
 }
