@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 2339444348921459470}
   - component: {fileID: 5539569846659137027}
   - component: {fileID: 471205274654733142}
+  - component: {fileID: 8659569031975362320}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -280,4 +281,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dc3b8d69b3dee9f820a200c28bcf3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMotor
+  walkSpeed: 5
+  sprintSpeed: 8
+  crouchSpeed: 2
   speed: 5
+  lerpCrouch: 0
+  crouching: 0
+  sprinting: 0
+  gravity: -9.8
+  jumpHeight: 1
+  crouchTimer: 0
+--- !u!114 &8659569031975362320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115034025146636398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b860e422eeaaac382799bf1d4dc16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
