@@ -2,12 +2,20 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-    //message displayed to player when looking at an Interactable
-    public string promptMessage;
 
+    //Add or remove an InteractionEvent component to this gameobject.
+    public bool useEvents;
+    [SerializeField] public string promptMessage;
+
+    public virtual string OnLook()
+    {
+        return promptMessage;
+    }
     //this function will be called from the player
     public void BaseInteract()
     {
+        if(useEvents)
+            GetComponent<InteractionEvent>().OnInteract.Invoke();
         Interact();
     }
     protected virtual void Interact()
