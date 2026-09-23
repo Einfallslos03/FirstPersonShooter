@@ -46,10 +46,10 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, Range, layerMask ))
         {
-            if(hit.collider.TryGetComponent(out Target target))
+            if(hit.collider.TryGetComponent(out EnemyHealth enemyHealth))
             {
-                Debug.Log($"Hit target {target.name}");
-                target.TakeDamage(20);
+                Debug.Log($"Hit target {enemyHealth.name}");
+                enemyHealth.TakeDamage(20);
             }
         }
     }
