@@ -1089,6 +1089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85784760221e5149f340a58ec09217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  bulletHolePrefab: {fileID: 8801357681647316035, guid: 6a5b4a9592df5c4c8813c12451b2a5c9, type: 3}
+  bulletHoleLifetime: 10
   Range: 100
   layerMask:
     serializedVersion: 2

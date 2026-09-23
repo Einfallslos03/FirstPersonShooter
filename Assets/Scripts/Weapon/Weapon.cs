@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private GameObject bulletHolePrefab;
+    [SerializeField] private float bulletHoleLifetime = 10f;
+
     [SerializeField] private float Range = 100.0f;
     [SerializeField] private LayerMask layerMask;
 
@@ -51,6 +54,21 @@ public class Weapon : MonoBehaviour
                 Debug.Log($"Hit target {enemyHealth.name}");
                 enemyHealth.TakeDamage(20);
             }
+            SpawnBulletHole(hit);
         }
+    }
+    private void SpawnBulletHole(RaycastHit hit)
+    {
+        if (bulletHolePrefab == null)
+            return;
+
+        GameObject bulletHole = Instantiate(
+            bulletHolePrefab,
+            hit.point + hit.normal * 0.01f, // kleiner Offset, damit die Decal nicht mit der Oberfläche "z-fighting" macht
+            Quaternion.LookRotation(hit.normal)
+        );
+
+        bulletHole.transform.SetParent(hit.transform); // bewegt sich mit, falls die Oberfläche sich bewegt (z. B. Gegner)
+        Destroy(bulletHole, bulletHoleLifetime);
     }
 }
